@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISSION CARD 任務卡</title>
+    <!-- QR Code Scanner -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <!-- QR Code Generator -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>任務卡 MISSION CARD</h1>
+            <div class="player-input-section">
+                <div class="input-group">
+                    <input type="text" id="player-name-input" placeholder="请输入你的名字 Enter your name" class="name-input">
+                    <button onclick="restartGame()" class="reset-button">重新開始 Reset</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Bingo 卡片网格 -->
+            <div class="bingo-grid">
+                <div class="bingo-cell" data-task="1">
+                    <div class="task-content">数一数场地内一共有多少蝴蝶结 Count how many ribbon bows are in the venue</div>
+                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="1">
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+                <div class="bingo-cell" data-task="2">
+                    <div class="task-content">Jeremiah 在哪裡向 Hanson 求婚? Where did Jeremiah propose to Hanson?</div>
+                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="2">
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+                <div class="bingo-cell" data-task="3">
+                    <div class="task-content">與新人自拍 Take a selfie with the newlyweds</div>
+                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="3">
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+                <div class="bingo-cell" data-task="4">
+                    <div class="task-content">和 3 位朋友擺出 "LOVE" 手勢合照一張 Take a photo with 3 friends showing the "LOVE" gesture with your hands</div>
+                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="4">
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+                <div class="bingo-cell auto-complete" data-task="5">
+                    <div class="center-logo">
+                        <img src="Images/logo.png" alt="Logo" class="cell-logo">
+                    </div>
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+                <div class="bingo-cell" data-task="6">
+                    <div class="task-content">在現場找到並拍照 2 件帶有"❤️"形狀的東西 Find and take a photo of 2 items with a ❤️ shape in the venue</div>
+                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="6">
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+                <div class="bingo-cell" data-task="7">
+                    <div class="task-content">新人是在哪一天相識的？（年月日）On what date (YYYY/MM/DD) did the newlyweds meet?</div>
+                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="7">
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+                <div class="bingo-cell" data-task="8">
+                    <div class="task-content">認識一位新賓客，寫下他名字和來自哪裡 Meet a new guest, write their name and place of origin</div>
+                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="8">
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+                <div class="bingo-cell" data-task="9">
+                    <div class="task-content">數一數婚宴場地內有多少種顏色的玫瑰花 Count how many colour of roses are in the venue</div>
+                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="9">
+                    <div class="stamp-container">
+                        <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 扫描按钮区域 -->
+            <div class="action-buttons-section">
+                <button id="start-scanner" class="action-button">扫描蓋章 Scan Stamp</button>
+            </div>
+
+            <!-- QR Code 扫描器 -->
+            <div class="scanner-section">
+                <div id="qr-reader" class="hidden"></div>
+            </div>
+        </main>
+
+        <!-- Bingo 提示弹窗 -->
+        <div id="bingo-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>🎉 BINGO！</h2>
+                <button class="action-button" onclick="continueGame()">确定 OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+    <script>
+        // 继续游戏 - 只关闭弹窗
+        function continueGame() {
+            document.getElementById('bingo-modal').classList.add('hidden');
+        }
+
+        // 重新开始游戏 - 重置所有进度
+        function restartGame() {
+            if (!confirm('确定要重新开始吗？这将清除所有进度。\nAre you sure you want to restart? This will clear all progress.')) {
+                return;
+            }
+            
+            // 重置名字
+            document.getElementById('player-name-input').value = '';
+            localStorage.removeItem('playerName'); // 清除存储的名字
+            
+            // 重置所有格子
+            const cells = document.querySelectorAll('.bingo-cell');
+            cells.forEach(cell => {
+                // 重置输入框
+                const input = cell.querySelector('.answer-input');
+                if (input) {
+                    input.value = '';
+                }
+                
+                // 重置印章
+                const stamp = cell.querySelector('.stamp');
+                if (stamp) {
+                    stamp.classList.add('hidden');
+                }
+                
+                // 清除单元格的完成状态
+                cell.removeAttribute('data-completed');
+            });
+            
+            // 清除本地存储中的所有游戏进度
+            localStorage.removeItem('bingoProgress');
+            localStorage.removeItem('completedCells');
+            
+            // 重置任何可能存在的 BINGO 状态
+            document.getElementById('bingo-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

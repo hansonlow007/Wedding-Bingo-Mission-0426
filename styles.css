@@ -1,0 +1,530 @@
+/* 全局样式重置和基础设置 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --primary-color: #c46775;  /* 玫瑰金色 */
+    --danger-color: #c46775;   /* 玫瑰金色 */
+    --border-color: #ddd;
+    --text-color: #333;
+    --background-color: #f3e6ff;
+    --purple-color: #e6ccff;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --reset-color: #b76e79;    /* 玫瑰金色 */
+    --rose-gold: #b76e79;      /* 玫瑰金色 */
+    --rose-gold-hover: #a25d67; /* 玫瑰金悬停色 */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    padding: 16px;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    font-size: 16px;
+    padding-bottom: 80px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: var(--header-bg);
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    color: var(--rose-gold);
+    margin-bottom: 20px;
+    font-size: 3rem;    
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+#player-info {
+    display: block;
+    margin: 8px 0;
+    font-size: 16px;
+    color: #4a5568;
+    text-align: center;
+}
+
+#player-name {
+    color: #2b6cb0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* 玩家输入区域样式 */
+.player-input-section {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-input {
+    flex: 1;
+    max-width: 300px;
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.name-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    outline: none;
+}
+
+.input-group .reset-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: var(--rose-gold);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.input-group .reset-button:hover {
+    background: var(--rose-gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(183, 110, 121, 0.2);
+}
+
+/* Bingo 网格样式 */
+.bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.bingo-cell {
+    border: none;
+    border-radius: 16px;
+    padding: 20px;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--header-bg);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.bingo-cell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.task-content {
+    flex: 1;
+    font-size: 15px;
+    margin-bottom: 16px;
+    overflow-y: auto;
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 4px 8px;
+}
+
+.answer-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.answer-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    outline: none;
+}
+
+.stamp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* 添加图片容器样式 */
+.stamp-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+/* 扫描器部分样式 */
+.scanner-section {
+    text-align: center;
+    margin: 24px 0;
+}
+
+.action-button {
+    padding: 14px 32px;
+    background: var(--rose-gold);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(183, 110, 121, 0.1);
+}
+
+.action-button:hover {
+    background: var(--rose-gold-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(183, 110, 121, 0.2);
+}
+
+#qr-reader {
+    width: 90% !important;
+    max-width: 350px !important;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: white;
+    padding: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* QR Reader 内部样式优化 */
+#qr-reader select {
+    font-size: 14px !important;
+    padding: 6px !important;
+    border-radius: 6px !important;
+    border: 1px solid #ddd !important;
+    margin: 6px 0 !important;
+    width: 100% !important;
+}
+
+#qr-reader button {
+    font-size: 14px !important;
+    padding: 8px 16px !important;
+    border-radius: 16px !important;
+    background: #2b6cb0 !important;
+    color: white !important;
+    border: none !important;
+    margin: 6px 0 !important;
+    width: 100% !important;
+}
+
+/* 弹窗样式 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 16px;
+}
+
+.modal p {
+    margin-bottom: 16px;
+    color: #4a5568;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* 工具类 */
+.hidden {
+    display: none;
+}
+
+/* 响应式设计 - 平板和桌面端 */
+@media (max-width: 768px) {
+    body {
+        padding: 8px 4px;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    header {
+        margin-bottom: 16px;
+        padding: 16px 12px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+        margin-bottom: 16px;
+    }
+
+    .bingo-grid {
+        gap: 12px;
+        margin: 16px 0;
+    }
+
+    .bingo-cell {
+        padding: 12px;
+    }
+
+    .task-content {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+        padding: 2px 4px;
+    }
+
+    .answer-input {
+        padding: 8px 10px;
+    }
+
+    .action-buttons-section {
+        margin: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 4px 2px;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    header {
+        margin-bottom: 12px;
+        padding: 12px 8px;
+        border-radius: 12px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 12px;
+        letter-spacing: 1px;
+    }
+
+    .input-group {
+        gap: 8px;
+    }
+
+    .name-input {
+        padding: 8px 12px;
+    }
+
+    .input-group .reset-button {
+        padding: 8px 16px;
+    }
+
+    .bingo-grid {
+        gap: 8px;
+        margin: 12px 0;
+    }
+
+    .bingo-cell {
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .task-content {
+        font-size: 13px;
+        line-height: 1.3;
+        margin-bottom: 8px;
+        padding: 2px 4px;
+    }
+
+    .answer-input {
+        padding: 6px 8px;
+        font-size: 13px;
+        border-width: 1px;
+    }
+
+    .action-buttons-section {
+        margin: 16px 0;
+        padding: 0 8px;
+    }
+
+    .action-button {
+        padding: 10px 24px;
+    }
+
+    .stamp {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* 中间格子的logo在手机上的样式 */
+    .center-logo {
+        padding: 6px;
+    }
+
+    .cell-logo {
+        width: 95%;
+        height: 95%;
+    }
+}
+
+@media (max-width: 360px) {
+    header {
+        padding: 10px 6px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .bingo-cell {
+        padding: 8px;
+    }
+
+    .task-content {
+        font-size: 12px;
+        line-height: 1.2;
+        margin-bottom: 6px;
+    }
+
+    .answer-input {
+        padding: 4px 6px;
+        font-size: 12px;
+    }
+
+    .stamp {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* 中间格子的logo样式 */
+.center-logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.cell-logo {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+/* 弹窗按钮样式 */
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.continue-button {
+    background-color: var(--primary-color) !important;
+}
+
+.reset-button {
+    background-color: var(--danger-color) !important;
+}
+
+.modal-buttons .action-button {
+    min-width: 140px;
+    font-weight: 600;
+}
+
+/* 操作按钮区域样式 */
+.action-buttons-section {
+    display: flex;
+    justify-content: center;
+    margin: 32px 0;
+}
+
+.action-buttons-section .action-button,
+.action-buttons-section .reset-button {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 160px;
+    transition: all 0.3s ease;
+}
+
+.action-buttons-section .action-button {
+    background-color: var(--rose-gold);
+    color: white;
+}
+
+.action-buttons-section .reset-button {
+    background-color: var(--rose-gold);
+    color: white;
+}
+
+.action-buttons-section button:hover {
+    background: var(--rose-gold-hover);
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(183, 110, 121, 0.2);
+} 
