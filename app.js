@@ -86,22 +86,18 @@ let html5QrcodeScanner;
 // 处理扫描结果
 function onScanSuccess(decodedText) {
     try {
-        console.log('Scanned QR Code:', decodedText); // 添加调试日志
+        console.log('Scanned QR Code:', decodedText);
         
-        // 尝试从QR码内容中提取任务ID
         let taskId;
         if (decodedText.includes('TASK_')) {
-            // 如果QR码格式是 "TASK_X"
             taskId = parseInt(decodedText.split('_')[1]);
         } else if (decodedText.includes('task')) {
-            // 如果QR码格式是 "taskX"
             taskId = parseInt(decodedText.replace('task', ''));
         } else {
-            // 直接尝试解析数字
             taskId = parseInt(decodedText);
         }
 
-        console.log('Extracted Task ID:', taskId); // 添加调试日志
+        console.log('Extracted Task ID:', taskId);
 
         if (taskId && taskId >= 1 && taskId <= 9) {
             const cell = document.querySelector(`.bingo-cell[data-task="${taskId}"]`);
@@ -116,10 +112,25 @@ function onScanSuccess(decodedText) {
                 localStorage.setItem('bingoTasks', JSON.stringify(tasks));
                 
                 cell.setAttribute('data-completed', 'true');
-                checkBingo();
                 
-                // 添加成功提示
-                alert('任務完成！Task completed!');
+                // 创建并显示成功提示
+                const successMessage = document.createElement('div');
+                successMessage.style.position = 'fixed';
+                successMessage.style.top = '20px';
+                successMessage.style.left = '50%';
+                successMessage.style.transform = 'translateX(-50%)';
+                successMessage.style.backgroundColor = '#4CAF50';
+                successMessage.style.color = 'white';
+                successMessage.style.padding = '10px 20px';
+                successMessage.style.borderRadius = '5px';
+                successMessage.style.zIndex = '1000';
+                successMessage.textContent = '任務完成！Task completed!';
+                document.body.appendChild(successMessage);
+                
+                // 3秒后移除提示
+                setTimeout(() => {
+                    successMessage.remove();
+                }, 3000);
                 
                 // 自动关闭扫描器
                 if (html5QrcodeScanner) {
@@ -129,47 +140,25 @@ function onScanSuccess(decodedText) {
                 }
             }
         } else {
-            console.log('Invalid task ID:', taskId); // 添加调试日志
+            console.log('Invalid task ID:', taskId);
             alert('無效的QR碼，請重試。Invalid QR code, please try again.');
         }
     } catch (error) {
-        console.error('QR Code scanning error:', error); // 添加详细错误日志
+        console.error('QR Code scanning error:', error);
         alert('掃描出錯，請重試。Scanning error, please try again.');
     }
 }
 
 // 检查是否达成 BINGO
 function checkBingo() {
-    const cells = document.querySelectorAll('.bingo-cell');
-    const completedStates = Array.from(cells).map(cell => cell.hasAttribute('data-completed'));
-    
-    // 检查行
-    for (let i = 0; i < 3; i++) {
-        if (completedStates[i*3] && completedStates[i*3+1] && completedStates[i*3+2]) {
-            showBingoModal();
-            return;
-        }
-    }
-    
-    // 检查列
-    for (let i = 0; i < 3; i++) {
-        if (completedStates[i] && completedStates[i+3] && completedStates[i+6]) {
-            showBingoModal();
-            return;
-        }
-    }
-    
-    // 检查对角线
-    if ((completedStates[0] && completedStates[4] && completedStates[8]) ||
-        (completedStates[2] && completedStates[4] && completedStates[6])) {
-        showBingoModal();
-        return;
-    }
+    // 不再需要检查BINGO
+    return;
 }
 
 // 显示 BINGO 弹窗
 function showBingoModal() {
-    document.getElementById('bingo-modal').classList.remove('hidden');
+    // 不再显示BINGO弹窗
+    return;
 }
 
 // 初始化扫描器
