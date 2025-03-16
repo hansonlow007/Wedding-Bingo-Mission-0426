@@ -67,11 +67,15 @@ function loadTaskStatus() {
     const tasks = JSON.parse(localStorage.getItem('bingoTasks'));
     Object.entries(tasks).forEach(([taskId, completed]) => {
         const cell = document.querySelector(`.bingo-cell[data-task="${taskId}"]`);
-        const stamp = cell.querySelector('.stamp');
-        if (completed) {
-            stamp.classList.remove('hidden');
-        } else {
-            stamp.classList.add('hidden');
+        if (cell) {
+            const stamp = cell.querySelector('.stamp');
+            if (stamp) {
+                if (completed) {
+                    stamp.classList.remove('hidden');
+                } else {
+                    stamp.classList.add('hidden');
+                }
+            }
         }
     });
 }
@@ -79,29 +83,29 @@ function loadTaskStatus() {
 // 初始化 HTML5 QR Code Scanner
 let html5QrcodeScanner;
 
-// 保存扫描状态到 localStorage
-function saveStampState(taskId) {
-    let completedCells = JSON.parse(localStorage.getItem('completedCells') || '[]');
-    if (!completedCells.includes(taskId)) {
-        completedCells.push(taskId);
-        localStorage.setItem('completedCells', JSON.stringify(completedCells));
-    }
-}
-
-// 从 localStorage 恢复扫描状态
-function restoreStampStates() {
-    const completedCells = JSON.parse(localStorage.getItem('completedCells') || '[]');
-    completedCells.forEach(taskId => {
-        const cell = document.querySelector(`.bingo-cell[data-task="${taskId}"]`);
-        if (cell) {
-            const stamp = cell.querySelector('.stamp');
-            if (stamp) {
-                stamp.classList.remove('hidden');
+// 处理扫描结果
+function onScanSuccess(decodedText) {
+    try {
+        const taskId = parseInt(decodedText);
+        if (taskId && taskId >= 1 && taskId <= 9) {
+            const cell = document.querySelector(`.bingo-cell[data-task="${taskId}"]`);
+            if (cell) {
+                const stamp = cell.querySelector('.stamp');
+                if (stamp) {
+                    stamp.classList.remove('hidden');
+                }
+                // 更新任务状态
+                const tasks = JSON.parse(localStorage.getItem('bingoTasks'));
+                tasks[taskId] = true;
+                localStorage.setItem('bingoTasks', JSON.stringify(tasks));
+                
+                cell.setAttribute('data-completed', 'true');
+                checkBingo();
             }
-            cell.setAttribute('data-completed', 'true');
         }
-    });
-    checkBingo();
+    } catch (error) {
+        console.error('Invalid QR code:', error);
+    }
 }
 
 // 检查是否达成 BINGO
@@ -138,27 +142,6 @@ function showBingoModal() {
     document.getElementById('bingo-modal').classList.remove('hidden');
 }
 
-// 处理扫描结果
-function onScanSuccess(decodedText) {
-    try {
-        const taskId = parseInt(decodedText);
-        if (taskId && taskId >= 1 && taskId <= 9) {
-            const cell = document.querySelector(`.bingo-cell[data-task="${taskId}"]`);
-            if (cell) {
-                const stamp = cell.querySelector('.stamp');
-                if (stamp) {
-                    stamp.classList.remove('hidden');
-                }
-                cell.setAttribute('data-completed', 'true');
-                saveStampState(taskId);
-                checkBingo();
-            }
-        }
-    } catch (error) {
-        console.error('Invalid QR code:', error);
-    }
-}
-
 // 初始化扫描器
 document.getElementById('start-scanner').addEventListener('click', function() {
     const reader = document.getElementById('qr-reader');
@@ -181,9 +164,9 @@ document.getElementById('start-scanner').addEventListener('click', function() {
     }
 });
 
-// 页面加载时恢复状态
+// 页面加载时初始化
 document.addEventListener('DOMContentLoaded', function() {
-    restoreStampStates();
+    initializePlayer();
     
     // 中间格子自动完成
     const centerCell = document.querySelector('.bingo-cell.auto-complete');
@@ -193,12 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (centerStamp) {
             centerStamp.classList.remove('hidden');
         }
-        saveStampState(5); // 假设中间格子的 taskId 是 5
+        const tasks = JSON.parse(localStorage.getItem('bingoTasks'));
+        tasks[5] = true; // 中间格子的 taskId 是 5
+        localStorage.setItem('bingoTasks', JSON.stringify(tasks));
     }
-});
-
-// 页面加载时初始化
-window.addEventListener('load', () => {
-    initializePlayer();
-}); 
 }); 
