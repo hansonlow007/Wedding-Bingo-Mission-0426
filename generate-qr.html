@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生成任务 QR Code</title>
+    <title>生成任務QR碼 Generate Task QR Codes</title>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background: #f5f7fa;
         }
         .qr-container {
             display: grid;
@@ -20,94 +19,100 @@
             margin-top: 20px;
         }
         .qr-item {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .qr-item img {
+            max-width: 200px;
+            height: auto;
         }
         h1 {
-            color: #2b6cb0;
             text-align: center;
+            color: #333;
         }
-        .task-name {
+        .task-title {
             margin: 10px 0;
-            color: #4a5568;
+            font-size: 14px;
+            color: #666;
         }
-        button {
-            background: #2b6cb0;
+        .download-all {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
             border-radius: 4px;
             cursor: pointer;
-            margin-top: 10px;
+            font-size: 16px;
         }
-        button:hover {
-            background: #2c5282;
+        .download-all:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>任务 QR Code 生成器</h1>
-    <div class="qr-container" id="qrContainer"></div>
+    <h1>任務QR碼 Task QR Codes</h1>
+    <button class="download-all" onclick="downloadAllQRCodes()">下載所有QR碼 Download All QR Codes</button>
+    <div class="qr-container" id="qr-container"></div>
 
     <script>
         const tasks = [
-            "数一数场地内一共有多少蝴蝶结 Count how many ribbon bows are in the venue",
-            "任务 2",
-            "任务 3",
-            "任务 4",
-            "任务 5",
-            "任务 6",
-            "任务 7",
-            "任务 8",
-            "任务 9"
+            "数一数场地内一共有多少蝴蝶结",
+            "Jeremiah 在哪裡向 Hanson 求婚?",
+            "與新人自拍",
+            "和 3 位朋友擺出 LOVE 手勢合照一張",
+            "中心格子",
+            "在現場找到並拍照 2 件帶有❤️形狀的東西",
+            "新人是在哪一天相識的？",
+            "認識一位新賓客，寫下他名字和來自哪裡",
+            "數一數婚宴場地內有多少種顏色的玫瑰花"
         ];
 
-        function generateQR(text) {
+        function generateQRCode(text, size = 4) {
             const qr = qrcode(0, 'L');
             qr.addData(text);
             qr.make();
-            return qr.createSvgTag({ cellSize: 4, margin: 2 });
+            return qr.createDataURL(size);
         }
 
-        function downloadQR(taskId) {
-            const svg = document.querySelector(`#qr-${taskId} svg`);
-            const svgData = new XMLSerializer().serializeToString(svg);
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const img = new Image();
+        function createQRCodeElement(taskId) {
+            const container = document.createElement('div');
+            container.className = 'qr-item';
             
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-                const pngFile = canvas.toDataURL('image/png');
-                const downloadLink = document.createElement('a');
-                downloadLink.download = `task-${taskId}-qr.png`;
-                downloadLink.href = pngFile;
-                downloadLink.click();
-            };
+            const img = document.createElement('img');
+            img.src = generateQRCode(taskId.toString());
+            img.alt = `Task ${taskId} QR Code`;
             
-            img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+            const title = document.createElement('div');
+            title.className = 'task-title';
+            title.textContent = `任務 ${taskId}: ${tasks[taskId-1]}`;
+            
+            container.appendChild(img);
+            container.appendChild(title);
+            return container;
+        }
+
+        function downloadQRCode(taskId) {
+            const link = document.createElement('a');
+            link.download = `task_${taskId}_qr.png`;
+            link.href = generateQRCode(taskId.toString());
+            link.click();
+        }
+
+        function downloadAllQRCodes() {
+            for (let i = 1; i <= 9; i++) {
+                setTimeout(() => downloadQRCode(i), i * 100);
+            }
         }
 
         window.onload = function() {
-            const container = document.getElementById('qrContainer');
-            tasks.forEach((task, index) => {
-                const taskId = index + 1;
-                const qrCode = generateQR(`BINGO_TASK_${taskId}`);
-                
-                const qrItem = document.createElement('div');
-                qrItem.className = 'qr-item';
-                qrItem.innerHTML = `
-                    <div id="qr-${taskId}">${qrCode}</div>
-                    <div class="task-name">任务 ${taskId}:<br>${task}</div>
-                    <button onclick="downloadQR(${taskId})">下载 QR Code</button>
-                `;
-                container.appendChild(qrItem);
-            });
+            const container = document.getElementById('qr-container');
+            for (let i = 1; i <= 9; i++) {
+                container.appendChild(createQRCodeElement(i));
+            }
         };
     </script>
 </body>
