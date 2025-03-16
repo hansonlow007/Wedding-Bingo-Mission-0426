@@ -86,7 +86,23 @@ let html5QrcodeScanner;
 // 处理扫描结果
 function onScanSuccess(decodedText) {
     try {
-        const taskId = parseInt(decodedText);
+        console.log('Scanned QR Code:', decodedText); // 添加调试日志
+        
+        // 尝试从QR码内容中提取任务ID
+        let taskId;
+        if (decodedText.includes('TASK_')) {
+            // 如果QR码格式是 "TASK_X"
+            taskId = parseInt(decodedText.split('_')[1]);
+        } else if (decodedText.includes('task')) {
+            // 如果QR码格式是 "taskX"
+            taskId = parseInt(decodedText.replace('task', ''));
+        } else {
+            // 直接尝试解析数字
+            taskId = parseInt(decodedText);
+        }
+
+        console.log('Extracted Task ID:', taskId); // 添加调试日志
+
         if (taskId && taskId >= 1 && taskId <= 9) {
             const cell = document.querySelector(`.bingo-cell[data-task="${taskId}"]`);
             if (cell) {
@@ -101,10 +117,24 @@ function onScanSuccess(decodedText) {
                 
                 cell.setAttribute('data-completed', 'true');
                 checkBingo();
+                
+                // 添加成功提示
+                alert('任務完成！Task completed!');
+                
+                // 自动关闭扫描器
+                if (html5QrcodeScanner) {
+                    html5QrcodeScanner.clear();
+                    html5QrcodeScanner = null;
+                    document.getElementById('qr-reader').classList.add('hidden');
+                }
             }
+        } else {
+            console.log('Invalid task ID:', taskId); // 添加调试日志
+            alert('無效的QR碼，請重試。Invalid QR code, please try again.');
         }
     } catch (error) {
-        console.error('Invalid QR code:', error);
+        console.error('QR Code scanning error:', error); // 添加详细错误日志
+        alert('掃描出錯，請重試。Scanning error, please try again.');
     }
 }
 
