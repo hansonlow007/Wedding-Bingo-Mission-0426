@@ -10,6 +10,66 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 中间格子的样式 */
+        .bingo-cell.auto-complete {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;  /* 减小padding给logo留更多空间 */
+            position: relative;
+        }
+
+        /* 中间logo容器的样式 */
+        .center-logo {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* 中间logo的样式 */
+        .cell-logo {
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        /* 底部logo的样式 */
+        .bottom-logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .bottom-logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        /* 确保印章不会覆盖logo */
+        .stamp-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        /* 响应式调整 */
+        @media screen and (max-width: 768px) {
+            .bingo-cell.auto-complete {
+                padding: 2px;  /* 在手机版上进一步减小padding */
+            }
+            .cell-logo {
+                max-width: 95%;  /* 增加到95% */
+                max-height: 95%; /* 增加到95% */
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -28,28 +88,28 @@
             <div class="bingo-grid">
                 <div class="bingo-cell" data-task="1">
                     <div class="task-content">数一数场地内一共有多少蝴蝶结 Count how many ribbon bows are in the venue</div>
-                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="1">
+                    <input type="text" class="answer-input" placeholder="答案 Answer" data-task="1">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
                     </div>
                 </div>
                 <div class="bingo-cell" data-task="2">
                     <div class="task-content">Jeremiah 在哪裡向 Hanson 求婚? Where did Jeremiah propose to Hanson?</div>
-                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="2">
+                    <input type="text" class="answer-input" placeholder="答案 Answer" data-task="2">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
                     </div>
                 </div>
                 <div class="bingo-cell" data-task="3">
                     <div class="task-content">與新人自拍 Take a selfie with the newlyweds</div>
-                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="3">
+                    <input type="text" class="answer-input" placeholder="答案 Answer" data-task="3">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
                     </div>
                 </div>
                 <div class="bingo-cell" data-task="4">
                     <div class="task-content">和 3 位朋友擺出 "LOVE" 手勢合照一張 Take a photo with 3 friends showing the "LOVE" gesture with your hands</div>
-                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="4">
+                    <input type="text" class="answer-input" placeholder="答案 Answer" data-task="4">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
                     </div>
@@ -64,28 +124,28 @@
                 </div>
                 <div class="bingo-cell" data-task="6">
                     <div class="task-content">在現場找到並拍照 2 件帶有"❤️"形狀的東西 Find and take a photo of 2 items with a ❤️ shape in the venue</div>
-                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="6">
+                    <input type="text" class="answer-input" placeholder="答案 Answer" data-task="6">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
                     </div>
                 </div>
                 <div class="bingo-cell" data-task="7">
                     <div class="task-content">新人是在哪一天相識的？（年月日）On what date (YYYY/MM/DD) did the newlyweds meet?</div>
-                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="7">
+                    <input type="text" class="answer-input" placeholder="答案 Answer" data-task="7">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
                     </div>
                 </div>
                 <div class="bingo-cell" data-task="8">
                     <div class="task-content">認識一位新賓客，寫下他名字和來自哪裡 Meet a new guest, write their name and place of origin</div>
-                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="8">
+                    <input type="text" class="answer-input" placeholder="答案 Answer" data-task="8">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
                     </div>
                 </div>
                 <div class="bingo-cell" data-task="9">
                     <div class="task-content">數一數婚宴場地內有多少種顏色的玫瑰花 Count how many colour of roses are in the venue</div>
-                    <input type="text" class="answer-input" placeholder="输入答案 Answer" data-task="9">
+                    <input type="text" class="answer-input" placeholder="答案 Answer" data-task="9">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
                     </div>
@@ -100,6 +160,11 @@
             <!-- QR Code 扫描器 -->
             <div class="scanner-section">
                 <div id="qr-reader" class="hidden"></div>
+            </div>
+
+            <!-- 添加底部logo -->
+            <div class="bottom-logo">
+                <img src="Images/logo.png" alt="Bottom Logo">
             </div>
         </main>
 
