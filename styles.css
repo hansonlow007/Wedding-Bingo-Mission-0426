@@ -8,14 +8,14 @@
 
 :root {
     --primary-color: #c46775;  /* 玫瑰金色 */
-    --danger-color: #c46775;   /* 玫瑰金色 */
+    --danger-color: #c46775;/* 玫瑰金色 */
     --border-color: #ddd;
     --text-color: #333;
     --background-color: #f3e6ff;
     --purple-color: #e6ccff;
     --header-bg: rgba(255, 255, 255, 0.95);
-    --reset-color: #b76e79;    /* 玫瑰金色 */
-    --rose-gold: #b76e79;      /* 玫瑰金色 */
+    --reset-color: #a15bcdb2;    /* 玫瑰金色 */
+    --rose-gold: #b76e79;      /* 玫瑰金色 *
     --rose-gold-hover: #a25d67; /* 玫瑰金悬停色 */
 }
 
@@ -201,26 +201,46 @@ h1 {
 /* 扫描器部分样式 */
 .scanner-section {
     text-align: center;
-    margin: 24px 0;
+    margin: 30px 0;
 }
 
 .action-button {
-    padding: 14px 32px;
+    padding: 10px 24px;
     background: var(--rose-gold);
     color: white;
     border: none;
     border-radius: 12px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(183, 110, 121, 0.1);
 }
 
-.action-button:hover {
-    background: var(--rose-gold-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(183, 110, 121, 0.2);
+.bottom-logo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+footer {
+    background-color: rgba(108, 73, 121, 0.835);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
 
 #qr-reader {
@@ -522,7 +542,8 @@ h1 {
     color: white;
 }
 
-.action-buttons-section button:hover {
+/* 只為 reset 按鈕保留 hover 效果 */
+.action-buttons-section .reset-button:hover {
     background: var(--rose-gold-hover);
     opacity: 1;
     transform: translateY(-2px);
