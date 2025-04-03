@@ -42,12 +42,27 @@
         /* 底部logo的样式 */
         .bottom-logo {
             text-align: center;
-            margin: 20px 0;
+            margin: 30px 0;  /* 增加上下边距 */
         }
         
         .bottom-logo img {
-            width: 100px;
+            width: 150px;  /* 增加宽度从100px到200px */
             height: auto;
+            max-width: 80%;  /* 确保在移动设备上不会太宽 */
+        }
+
+        /* BINGO文字样式 */
+        .bingo-text {
+            color: #FF69B4;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 隐藏元素的样式 */
+        .hidden {
+            display: none;
         }
 
         /* 确保印章不会覆盖logo */
@@ -98,7 +113,7 @@
             <!-- Bingo 卡片网格 -->
             <div class="bingo-grid">
                 <div class="bingo-cell" data-task="1">
-                    <div class="task-content">数一数场地内一共有多少蝴蝶结 Count how many ribbon bows are in the venue</div>
+                    <div class="task-content">数一数场地内一共有多少張新人的照片用做擺設 Count how many photos of the newlyweds are displayed at the venue</div>
                     <input type="text" class="answer-input" placeholder="答案 Answer" data-task="1">
                     <div class="stamp-container">
                         <img class="stamp hidden" src="Images/logo.png" alt="完成印章">
@@ -172,7 +187,7 @@
 
             <!-- 添加底部logo -->
             <div class="bottom-logo">
-                <img src="Images/logo.png" alt="Bottom Logo">
+            <img src="Images/logo.png" alt="Bottom Logo">
             </div>
 
             <footer>
