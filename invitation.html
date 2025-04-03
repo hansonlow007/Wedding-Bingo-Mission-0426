@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Jeremiah & Hanson Wedding Invitation</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+<link rel="stylesheet" type="text/css" href="./styles/modal.css">
+<link rel="stylesheet" type="text/css" href="./styles/styles_new.css">
+<style>
+    section {
+        margin: 5rem 0;
+    }
+    .dress-code {
+        margin: 5rem 0;
+    }
+    .couple-info-content {
+        margin: 5rem 0;
+    }
+    .our-story {
+        margin: 5rem 0;
+    }
+    .wedding-details {
+        margin: 5rem 0;
+    }
+    .itinerary {
+        margin: 5rem 0;
+    }
+    .wishes-section {
+        margin: 5rem 0;
+    }
+</style>
+</head>
+
+<body>
+	  <nav class="pink-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">
+                    <img src="images/wedding logo.png" alt="Wedding Logo">
+                </a>
+                <div class="music-controls">
+                    <button id="musicToggle" class="music-btn">♪</button>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="pink-btn lang-btn" onclick="toggleLanguage()">
+                    <span class="lang-text en">Switch Language/切換語言</span>
+                    <span class="lang-text zh">切換語言/Switch Language</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <audio id="bgMusic" loop autoplay>
+        <source src="music/wedding-bgm.mp3" type="audio/mp3">
+    </audio>
+
+    <header class="video-section">
+        <div class="video-container">
+            <video id="weddingVideo" autoplay muted loop playsinline>
+                <source src="videos/wedding-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-controls">
+                <button id="videoToggle" class="video-btn">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="couple-info">
+            <div class="section-divider fade-in">
+                <span class="line left"></span>
+                <span class="heart">♥</span>
+                <span class="line right"></span>
+            </div>
+            <h2 class="fade-in">
+                <span class="en">We're Getting Married!</span>
+                <span class="zh">我們結婚啦!</span>
+            </h2>
+            <div class="couple-info-content fade-in">
+                <div class="photo-container fade-in">
+                    <img src="images/couple.jpg" alt="Jeremiah & Hanson" class="header-photo">
+                </div>
+                <div class="couple-names fade-in">
+                    <h3 style="background: linear-gradient(45deg, #B76E79, #9b89c9, #E6B8B7, #B76E79); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: roseGoldGradient 6s ease infinite;">
+                        <span>Jeremiah</span> & <span>Hanson</span>
+                    </h3>
+                </div>
+                <div class="love-story fade-in">
+                    <p class="story-text">
+                        <span class="en">Our journey began on a beautiful spring day in 2010. From the moment we met, we knew there was something special between us. After years of growing together, we're excited to start this new chapter of our lives.</span>
+                        <span class="zh">我們的愛情故事始於2010年的一個夏天。從相遇的那一刻起，我們就知道彼此之間有著特別的連結。經過多年的相處與成長，我們很興奮能一起開啟人生的新篇章。</span>
+                    </p>
+                </div>
+                <div class="proposal-date fade-in">
+                    <p class="date-text">
+                        <span class="en">We met on April 16, 2010</span>
+                        <span class="zh">我們相識於2010年4月16日</span>
+                    </p>
+                </div>
+                <div class="dress-code-content fade-in" style="margin-top: 5rem; border: none;">
+                    <p class="verse-reference" style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1rem; border: none; position: relative;">
+                        <span class="en">1 Corinthians 13:4-8a</span>
+                        <span class="zh">哥林多前書 13:4-8a</span>
+                    </p>
+                    <p class="verse-text" style="font-family: 'Playfair Display', serif; font-size: 1.1rem; line-height: 1.6; position: relative;">
+                        <span class="en">"Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs. Love does not delight in evil but rejoices with the truth. It always protects, always trusts, always hopes, always perseveres. Love never fails."</span>
+                        <span class="zh">「愛是恆久忍耐，又有恩慈；愛是不嫉妒；愛是不自誇，不張狂，不做害羞的事，不求自己的益處，不輕易發怒，不計算人的惡，不喜歡不義，只喜歡真理。凡事包容，凡事相信，凡事盼望，凡事忍耐。愛是永不止息。」</span>
+                    </p>
+                </div>
+                <div class="social-container fade-in">
+                    <a href="https://www.instagram.com/jh0426.ig/" class="ig-button" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span>Follow Our Wedding Journey</span>
+                        <span class="ig-handle">@jh0426.ig</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="our-story">
+            <div class="section-divider fade-in">
+                <span class="line left"></span>
+                <span class="heart">♥</span>
+                <span class="line right"></span>
+            </div>
+            <h2 class="fade-in">
+                <span class="en">Photo Gallery</span>
+                <span class="zh">婚紗相簿</span>
+            </h2>
+            <p class="gallery-hint fade-in" style="font-size: 0.8rem; font-style: italic; color: #666; text-align: center; margin: 0.5rem 0 1.5rem;">
+                <span class="en">Click on the image to view it in full size.</span>
+                <span class="zh">點擊圖片以查看完整尺寸</span>
+            </p>
+            <div class="story-grid fade-in">
+                <div class="story-item fade-in" style="--item-index: 1" onclick="openModal(this)">
+                    <img src="images/gallery1.jpg" alt="照片1">
+                </div>
+                <div class="story-item fade-in" style="--item-index: 2" onclick="openModal(this)">
+                    <img src="images/gallery2.jpg" alt="照片2">
+                </div>
+                <div class="story-item fade-in" style="--item-index: 3" onclick="openModal(this)">
+                    <img src="images/gallery3.jpg" alt="照片3">
+                </div>
+                <div class="story-item fade-in" style="--item-index: 4" onclick="openModal(this)">
+                    <img src="images/gallery4.jpg" alt="照片4">
+                </div>
+                <div class="story-item fade-in" style="--item-index: 5" onclick="openModal(this)">
+                    <img src="images/gallery5.jpg" alt="照片5">
+                </div>
+                <div class="story-item fade-in" style="--item-index: 6" onclick="openModal(this)">
+                    <img src="images/gallery6.jpg" alt="照片6">
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Modal -->
+        <div id="imageModal" class="modal">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
+        <section class="wedding-details">
+            <div class="section-divider fade-in">
+                <span class="line left"></span>
+                <span class="heart">♥</span>
+                <span class="line right"></span>
+            </div>
+            <h2 class="fade-in">
+                <span class="en">Wedding Details</span>
+                <span class="zh">婚禮資訊</span>
+            </h2>
+            <div class="details-container fade-in">
+                <div class="detail-item fade-in">
+                    <h3>
+                        <span class="en">Date</span>
+                        <span class="zh">日期</span>
+                    </h3>
+                    <p>
+                        <span class="en">26th April 2025</span>
+                        <span class="zh">2025年4月26日</span>
+                    </p>
+                </div>
+                <div class="detail-item fade-in">
+                    <h3>
+                        <span class="en">Time</span>
+                        <span class="zh">時間</span>
+                    </h3>
+                    <p>
+                        <span class="en">2:00 PM</span>
+                        <span class="zh">下午 2:00</span>
+                    </p>
+                </div>
+                <div class="detail-item fade-in">
+                    <h3>
+                        <span class="en">Location</span>
+                        <span class="zh">地點</span>
+                    </h3>
+                    <p>
+                        <span class="en">True Light Gospel Church</span>
+                        <span class="zh">真光福音教會</span>
+                    </p>
+                    <p>
+                        <span class="en">Taipei City, Taiwan</span>
+                        <span class="zh">台北市</span>
+                    </p>
+                    <a href="https://maps.google.com/?q=真光福音教會" target="_blank" class="pink-btn map-btn">
+                        <span class="en">View Map</span>
+                        <span class="zh">查看地圖</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="dress-code">
+            <div class="section-divider fade-in">
+                <span class="line left"></span>
+                <span class="heart">♥</span>
+                <span class="line right"></span>
+            </div>
+            <h2 class="fade-in">
+                <span class="en">Dress Code</span>
+                <span class="zh">穿著建議</span>
+            </h2>
+            <div class="dress-code-content fade-in">
+                <p>
+                    <span class="en">Semi-Formal Attire</span>
+                    <span class="zh">正式休閒服裝</span>
+                </p>
+                <div class="color-circles">
+                    <div class="circle white"></div>
+                    <div class="circle beige"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="itinerary">
+            <div class="section-divider fade-in">
+                <span class="line left"></span>
+                <span class="heart">♥</span>
+                <span class="line right"></span>
+            </div>
+            <h2 class="fade-in">
+                <span class="en">Itinerary</span>
+                <span class="zh">婚禮流程</span>
+            </h2>
+            <div class="itinerary-content fade-in">
+                <div class="itinerary-item fade-in">
+                    <div class="time">
+                        <span class="en">1:40 PM</span>
+                        <span class="zh">下午 1:40</span>
+                    </div>
+                    <div class="event">
+                        <span class="en">Guest Arrival</span>
+                        <span class="zh">嘉賓入場</span>
+                    </div>
+                </div>
+                <div class="itinerary-item fade-in">
+                    <div class="time">
+                        <span class="en">2:00 PM</span>
+                        <span class="zh">下午 2:00</span>
+                    </div>
+                    <div class="event">
+                        <span class="en">Ceremony Commencement</span>
+                        <span class="zh">婚禮儀式開始</span>
+                    </div>
+                </div>
+                <div class="itinerary-item fade-in">
+                    <div class="time">
+                        <span class="en">3:00 PM</span>
+                        <span class="zh">下午 3:00</span>
+                    </div>
+                    <div class="event">
+                        <span class="en">Ceremony End</span>
+                        <span class="zh">婚禮儀式結束</span>
+                    </div>
+                </div>
+                <div class="itinerary-item fade-in">
+                    <div class="time">
+                        <span class="en">3:05 PM</span>
+                        <span class="zh">下午 3:05</span>
+                    </div>
+                    <div class="event">
+                        <span class="en">Group Photo Session</span>
+                        <span class="zh">大合照</span>
+                    </div>
+                </div>
+                <div class="itinerary-item fade-in">
+                    <div class="time">
+                        <span class="en">3:10 PM</span>
+                        <span class="zh">下午 3:10</span>
+                    </div>
+                    <div class="event">
+                        <span class="en">Tea-time Buffet</span>
+                        <span class="zh">精緻下午茶</span>
+                    </div>
+                </div>
+                <div class="itinerary-item fade-in">
+                    <div class="time">
+                        <span class="en">4:00 PM</span>
+                        <span class="zh">下午 4:00</span>
+                    </div>
+                    <div class="event">
+                        <span class="en">Game Session</span>
+                        <span class="zh">遊戲環節</span>
+                    </div>
+                </div>
+                <div class="itinerary-item fade-in">
+                    <div class="time">
+                        <span class="en">5:00 PM</span>
+                        <span class="zh">下午 5:00</span>
+                    </div>
+                    <div class="event">
+                        <span class="en">End Of The Event</span>
+                        <span class="zh">活動結束</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="wishes-section">
+            <div class="section-divider fade-in">
+                <span class="line left"></span>
+                <span class="heart">♥</span>
+                <span class="line right"></span>
+            </div>
+            <h2 class="fade-in">
+                <span class="en">Wishes</span>
+                <span class="zh"><b>祝福語</b></span>
+            </h2>
+            
+            <!-- 留言表單 -->
+            <div class="wishes-form-container fade-in">
+                <form id="wishesForm" class="wishes-form">
+                    <div class="form-group">
+                        <input type="text" id="guestName" required placeholder=" ">
+                        <label for="guestName">
+                            <span class="en">Your Name</span>
+                            <span class="zh">你的名字</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="wishMessage" required placeholder=" "></textarea>
+                        <label for="wishMessage">
+                            <span class="en">Your Wishes</span>
+                            <span class="zh">祝福留言</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="pink-btn">
+                        <span class="en">Send Wishes</span>
+                        <span class="zh">送出祝福</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- 在 wishes-display 之前添加切換按鈕 -->
+            <button id="toggleWishes" class="toggle-wishes-btn">
+                <span class="en show-text">▼ View Wishes</span>
+                <span class="en hide-text" style="display: none;">▲ Hide Wishes</span>
+                <span class="zh show-text">▼ 查看留言</span>
+                <span class="zh hide-text" style="display: none;">▲ 收起留言</span>
+            </button>
+
+            <!-- 修改 wishes-display 的初始狀態 -->
+            <div class="wishes-display" style="display: none;">
+                <div id="wishesList" class="wishes-list">
+                    <!-- 留言會動態插入這裡 -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        let currentLanguage = 'en';
+
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            // 更新所有語言相關元素的顯示狀態
+            document.querySelectorAll('.en, .zh').forEach(el => {
+                el.classList.remove('active');
+                if (el.classList.contains(lang)) {
+                    el.classList.add('active');
+                }
+            });
+            
+            // 更新語言切換按鈕的狀態
+            document.querySelectorAll('.lang-text').forEach(el => {
+                el.classList.remove('active');
+                if (el.classList.contains(lang)) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        function toggleLanguage() {
+            const newLang = currentLanguage === 'en' ? 'zh' : 'en';
+            switchLanguage(newLang);
+        }
+
+        // 頁面載入時執行
+        document.addEventListener('DOMContentLoaded', function() {
+            const lang = getUrlParameter('lang') || 'en';
+            switchLanguage(lang);
+        });
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        // Video controls
+        const video = document.getElementById('weddingVideo');
+        const videoToggle = document.getElementById('videoToggle');
+        const volumeIcon = videoToggle.querySelector('i');
+
+        videoToggle.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                volumeIcon.classList.remove('fa-volume-mute');
+                volumeIcon.classList.add('fa-volume-up');
+            } else {
+                video.muted = true;
+                volumeIcon.classList.remove('fa-volume-up');
+                volumeIcon.classList.add('fa-volume-mute');
+            }
+        });
+    </script>
+</body>
+</html>
